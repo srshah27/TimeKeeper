@@ -47,10 +47,12 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(820, 600));
+        setPreferredSize(new java.awt.Dimension(830, 600));
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 206, 201));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jPanel2.setBackground(new java.awt.Color(0, 206, 201));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -94,7 +96,13 @@ public class MainFrame extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jButton6.setText("COMPLETED");
-        jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.setBorder(null);
+        jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -128,13 +136,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(129, 236, 236));
         jPanel3.setPreferredSize(new java.awt.Dimension(700, 800));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 767, Short.MAX_VALUE)
+            .addGap(0, 779, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,19 +158,18 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -173,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
 
         pack();
@@ -186,6 +194,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat time = new SimpleDateFormat("hh:mm:ss");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -197,9 +206,12 @@ public class MainFrame extends javax.swing.JFrame {
             rs.next();
             while (rs.getInt("Important") == 1) {
                 ContentPane Panel = new ContentPane();
-                Panel.setBounds(50, 20 + (i * 100), 700, 100);
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
                 Panel.lblEventName.setText(rs.getString("EventName"));
-                Panel.DueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
                 Panel.setBackground(new Color(95, 39, 205));
                 jPanel3.add(Panel);
                 i++;
@@ -207,9 +219,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
             do {
                 ContentPane Panel = new ContentPane();
-                Panel.setBounds(50, 20 + (i * 100), 700, 100);
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
                 Panel.lblEventName.setText(rs.getString("EventName"));
-                Panel.DueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(238, 82, 83));
                 }
@@ -228,6 +242,36 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+        int i = 0;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+
+            jPanel3.removeAll();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from events where completed = 1 order by Important desc, DueDate;");
+            while (rs.next()) {
+                ContentPane Panel = new ContentPane();
+                Panel.setBackground(Color.green);
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblEventName.setText(rs.getString("EventName"));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                jPanel3.add(Panel);
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        jScrollPane2.setViewportView(jPanel3);
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

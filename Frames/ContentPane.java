@@ -17,6 +17,7 @@ public class ContentPane extends javax.swing.JPanel {
      */
     public ContentPane() {
         initComponents();
+        lblID.setVisible(false);
     }
 
     /**
@@ -29,10 +30,11 @@ public class ContentPane extends javax.swing.JPanel {
     private void initComponents() {
 
         lblEventName = new javax.swing.JLabel();
-        DueDate = new javax.swing.JLabel();
-        CategoryName = new javax.swing.JLabel();
-        CategoryName1 = new javax.swing.JLabel();
+        lblDueDate = new javax.swing.JLabel();
+        lblCategoryName = new javax.swing.JLabel();
+        lblDueTime = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        lblID = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 102, 255));
         setPreferredSize(new java.awt.Dimension(700, 100));
@@ -45,17 +47,19 @@ public class ContentPane extends javax.swing.JPanel {
         lblEventName.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         lblEventName.setText("EventName");
 
-        DueDate.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        DueDate.setText("DueDate");
+        lblDueDate.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        lblDueDate.setText("DueDate");
 
-        CategoryName.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        CategoryName.setText("CategoryName");
+        lblCategoryName.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        lblCategoryName.setText("CategoryName");
 
-        CategoryName1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        CategoryName1.setText("DueTime");
+        lblDueTime.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        lblDueTime.setText("DueTime");
 
         jSeparator2.setBackground(new java.awt.Color(51, 51, 255));
         jSeparator2.setForeground(new java.awt.Color(51, 51, 255));
+
+        lblID.setText("ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,45 +69,54 @@ public class ContentPane extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEventName)
-                    .addComponent(DueDate))
+                    .addComponent(lblDueDate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CategoryName)
-                    .addComponent(CategoryName1))
+                    .addComponent(lblCategoryName)
+                    .addComponent(lblDueTime))
                 .addGap(94, 94, 94))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addComponent(lblID)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEventName)
-                    .addComponent(CategoryName))
-                .addGap(18, 18, 18)
+                    .addComponent(lblCategoryName))
+                .addGap(2, 2, 2)
+                .addComponent(lblID)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DueDate)
-                    .addComponent(CategoryName1))
+                    .addComponent(lblDueDate)
+                    .addComponent(lblDueTime))
                 .addGap(21, 21, 21))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 92, Short.MAX_VALUE)
+                    .addGap(0, 98, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         //JOptionPane.showMessageDialog(this, lblEventName.getText());
-        new EventDesc().setVisible(true);
+        EventDesc ed = new EventDesc();
+        ed.setVisible(true);
+        ed.txtEventName.setText(lblEventName.getText());
     }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel CategoryName;
-    public javax.swing.JLabel CategoryName1;
-    public javax.swing.JLabel DueDate;
     private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JLabel lblCategoryName;
+    public javax.swing.JLabel lblDueDate;
+    public javax.swing.JLabel lblDueTime;
     public javax.swing.JLabel lblEventName;
+    public javax.swing.JLabel lblID;
     // End of variables declaration//GEN-END:variables
 }
