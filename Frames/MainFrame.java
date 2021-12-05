@@ -59,6 +59,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2.setText("ADD");
         jButton2.setBorder(null);
         jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -137,7 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(129, 236, 236));
-        jPanel3.setPreferredSize(new java.awt.Dimension(700, 800));
+        jPanel3.setPreferredSize(new java.awt.Dimension(700, 1000));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -147,7 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(jPanel3);
@@ -160,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 798, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,8 +216,9 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblEventName.setText(rs.getString("EventName"));
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
-                Panel.setBackground(new Color(95, 39, 205));
+                Panel.setBackground(new Color(237, 76, 103));
                 jPanel3.add(Panel);
                 i++;
                 rs.next();
@@ -224,6 +230,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(238, 82, 83));
                 }
@@ -257,6 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("select * from events where completed = 1 order by Important desc, DueDate;");
             while (rs.next()) {
                 ContentPane Panel = new ContentPane();
+                Panel.btnComplete.setVisible(false);
                 Panel.setBackground(Color.green);
                 Panel.setBounds(50, 50 + (i * 100), 700, 100);
                 Panel.lblEventName.setText(rs.getString("EventName"));
@@ -272,6 +280,21 @@ public class MainFrame extends javax.swing.JFrame {
         revalidate();
         repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        EventDesc ed = new EventDesc();
+        ed.setVisible(true);
+        ed.btnAddEvent.setVisible(true);
+        ed.txtEventName.setEditable(true);
+        ed.txtCategoryName.setEditable(true);
+        ed.jCheckBox1.setEnabled(true);
+        ed.jComboBox1.setEnabled(true);
+        ed.jComboBox2.setEnabled(true);
+        ed.jComboBox3.setEnabled(true);
+        ed.jComboBox4.setEnabled(true);
+        ed.jComboBox5.setEnabled(true);
+        ed.jComboBox6.setEnabled(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

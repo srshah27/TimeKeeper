@@ -33,10 +33,11 @@ public class ContentPane extends javax.swing.JPanel {
         lblDueDate = new javax.swing.JLabel();
         lblCategoryName = new javax.swing.JLabel();
         lblDueTime = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         lblID = new javax.swing.JLabel();
+        btnComplete = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
-        setBackground(new java.awt.Color(204, 102, 255));
+        setBackground(new java.awt.Color(255, 153, 204));
         setPreferredSize(new java.awt.Dimension(700, 100));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -56,50 +57,59 @@ public class ContentPane extends javax.swing.JPanel {
         lblDueTime.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         lblDueTime.setText("DueTime");
 
-        jSeparator2.setBackground(new java.awt.Color(51, 51, 255));
-        jSeparator2.setForeground(new java.awt.Color(51, 51, 255));
-
         lblID.setText("ID");
+
+        btnComplete.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        btnComplete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tickmark.png"))); // NOI18N
+        btnComplete.setBorder(null);
+        btnComplete.setBorderPainted(false);
+        btnComplete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEventName)
-                    .addComponent(lblDueDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
+                    .addComponent(lblDueDate)
+                    .addComponent(lblEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDueTime, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(122, 122, 122)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCategoryName)
-                    .addComponent(lblDueTime))
-                .addGap(94, 94, 94))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(lblID)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING)))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEventName)
-                    .addComponent(lblCategoryName))
-                .addGap(2, 2, 2)
-                .addComponent(lblID)
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDueDate)
-                    .addComponent(lblDueTime))
-                .addGap(21, 21, 21))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 98, Short.MAX_VALUE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEventName)
+                            .addComponent(lblCategoryName))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDueDate)
+                            .addComponent(lblDueTime)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -108,11 +118,26 @@ public class ContentPane extends javax.swing.JPanel {
         EventDesc ed = new EventDesc();
         ed.setVisible(true);
         ed.txtEventName.setText(lblEventName.getText());
+        ed.IDDesc.setText(lblID.getText());
+        ed.btnConfirm.setVisible(true);
+        ed.btnUpdate.setVisible(true);       
+        ed.txtCategoryName.setText(lblCategoryName.getText());
+        ed.jComboBox1.setSelectedItem(Character.toString(lblDueDate.getText().charAt(8)) + Character.toString(lblDueDate.getText().charAt(9)));
+        ed.jComboBox2.setSelectedItem(Character.toString(lblDueDate.getText().charAt(5)) + Character.toString(lblDueDate.getText().charAt(6)));
+        ed.jComboBox3.setSelectedItem(Character.toString(lblDueDate.getText().charAt(0)) + Character.toString(lblDueDate.getText().charAt(1)) + Character.toString(lblDueDate.getText().charAt(2)) + Character.toString(lblDueDate.getText().charAt(3)));
+        ed.jComboBox4.setSelectedItem(Character.toString(lblDueTime.getText().charAt(0)) + Character.toString(lblDueTime.getText().charAt(1)));
+        ed.jComboBox5.setSelectedItem(Character.toString(lblDueTime.getText().charAt(3)) + Character.toString(lblDueTime.getText().charAt(4)));
+        ed.jComboBox6.setSelectedItem(Character.toString(lblDueTime.getText().charAt(6)) + Character.toString(lblDueTime.getText().charAt(7)));        
     }//GEN-LAST:event_formMouseClicked
+
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JButton btnComplete;
+    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JLabel lblCategoryName;
     public javax.swing.JLabel lblDueDate;
     public javax.swing.JLabel lblDueTime;
