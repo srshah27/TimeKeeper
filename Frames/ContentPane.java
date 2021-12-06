@@ -6,6 +6,7 @@ package Frames;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.awt.event.*;
 
 /**
  *
@@ -155,8 +156,6 @@ public class ContentPane extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
-        MainFrame mframe = new MainFrame();
-        mframe.MainUpcoming(evt);
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 

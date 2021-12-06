@@ -30,7 +30,7 @@ public class EventDesc extends javax.swing.JFrame {
         Edited.setVisible(false);
 
         cmbDD.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.DATE)));
-        cmbMM.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MONTH)+1));
+        cmbMM.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MONTH) + 1));
         cmbYYYY.setSelectedItem(String.format("%04d", Calendar.getInstance().get(Calendar.YEAR)));
 
         cmbHours.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.HOUR)));
@@ -296,6 +296,23 @@ public class EventDesc extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+            PreparedStatement pst = con.prepareStatement("update events set EventName = ?, Category = ?, Important = ?, DueDate = ?, DueTime = ? where ID = ?;");
+            pst.setString(1, txtEventName.getText());
+            pst.setString(2, txtCategoryName.getText());
+            pst.setInt(3, chbImportant.isSelected() ? 1 : 0);
+            pst.setString(4, cmbYYYY.getSelectedItem().toString() + "-" + cmbMM.getSelectedItem().toString() + "-" + cmbDD.getSelectedItem().toString());
+            pst.setString(5, cmbHours.getSelectedItem().toString() + ":" + cmbMinutes.getSelectedItem().toString() + ":" + cmbSeconds.getSelectedItem().toString());
+            pst.setInt(6, Integer.parseInt(IDDesc.getText()));
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Event Updated");
+            dispose();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         dispose();
     }//GEN-LAST:event_btnConfirmActionPerformed
 
@@ -316,7 +333,6 @@ public class EventDesc extends javax.swing.JFrame {
 
                 PreparedStatement pst = con.prepareStatement("insert into events(EventName, Category, Important, Completed, DueDate, DueTime) values(?, ?, ?, 0, ?, ?);");
                 pst.setString(1, txtEventName.getText());
-                JOptionPane.showMessageDialog(this, txtEventName.getText());
                 pst.setString(2, txtCategoryName.getText());
                 pst.setInt(3, chbImportant.isSelected() ? 1 : 0);
                 pst.setString(4, cmbYYYY.getSelectedItem().toString() + "-" + cmbMM.getSelectedItem().toString() + "-" + cmbDD.getSelectedItem().toString());

@@ -24,8 +24,69 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-
         this.setLocationRelativeTo(null);
+        int i = 0;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+
+            jPanel3.removeAll();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from events where completed = 0 and DueDate>=curdate() order by Important desc, DueDate;");
+            rs.next();
+            Statement curtime = con.createStatement();
+
+            ResultSet rstime = curtime.executeQuery("select curtime(), curdate();");
+            rstime.next();
+            //System.out.println(rstime.getTime("curtime()").before(rs.getTime("DueTime")));
+            while (rs.getInt("Important") == 1) {
+                if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+                        rs.next();
+                        continue;
+                    }
+                }
+                ContentPane Panel = new ContentPane();
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
+                Panel.lblEventName.setText(rs.getString("EventName"));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
+                Panel.setBackground(new Color(255, 234, 167));
+                jPanel3.add(Panel);
+                i++;
+                rs.next();
+            }
+            do {
+                ContentPane Panel = new ContentPane();
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblEventName.setText(rs.getString("EventName"));
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(false);
+                if (i % 2 != 0) {
+                    Panel.setBackground(new Color(178, 190, 195));
+                }
+                jPanel3.add(Panel);
+                i++;
+            } while (rs.next());
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        jScrollPane2.setViewportView(jPanel3);
+        revalidate();
+        repaint();
     }
 
     /**
@@ -48,9 +109,15 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TimeKeeper");
 
         jPanel1.setBackground(new java.awt.Color(0, 206, 201));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 206, 201));
 
@@ -223,12 +290,10 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
-                Panel.btnComplete.setVisible(false);
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
                 Panel.setBackground(new Color(255, 234, 167));
                 jPanel3.add(Panel);
                 i++;
-                rs.next();
             }
             con.close();
         } catch (Exception e) {
@@ -239,10 +304,7 @@ public class MainFrame extends javax.swing.JFrame {
         repaint();
 
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void MainUpcoming(java.awt.event.ActionEvent evt)
-    {
-        MainUpcomingActionPerformed(evt);
-    }
+
     private void MainUpcomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainUpcomingActionPerformed
         int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -292,6 +354,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(false);
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(178, 190, 195));
                 }
@@ -332,6 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(false);
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(178, 190, 195));
                 }
@@ -362,6 +426,10 @@ public class MainFrame extends javax.swing.JFrame {
         ed.cmbMinutes.setEnabled(true);
         ed.cmbSeconds.setEnabled(true);
     }//GEN-LAST:event_MainAddActionPerformed
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+
+    }//GEN-LAST:event_jPanel1FocusGained
 
     /**
      * @param args the command line arguments
@@ -423,7 +491,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
