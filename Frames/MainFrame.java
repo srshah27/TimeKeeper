@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import java.awt.event.*;
 
 /**
  *
@@ -38,30 +39,29 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        MainAdd = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        MainUpcoming = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(830, 600));
 
         jPanel1.setBackground(new java.awt.Color(0, 206, 201));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel2.setBackground(new java.awt.Color(0, 206, 201));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jButton2.setText("ADD");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        MainAdd.setBackground(new java.awt.Color(255, 255, 255));
+        MainAdd.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        MainAdd.setText("ADD");
+        MainAdd.setBorder(null);
+        MainAdd.setContentAreaFilled(false);
+        MainAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                MainAddActionPerformed(evt);
             }
         });
 
@@ -87,14 +87,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jButton1.setText("UPCOMING");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        MainUpcoming.setBackground(new java.awt.Color(255, 255, 255));
+        MainUpcoming.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        MainUpcoming.setText("UPCOMING");
+        MainUpcoming.setBorder(null);
+        MainUpcoming.setContentAreaFilled(false);
+        MainUpcoming.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                MainUpcomingActionPerformed(evt);
             }
         });
 
@@ -115,11 +115,11 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MainUpcoming, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MainAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -130,8 +130,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MainUpcoming, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MainAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
@@ -193,23 +193,28 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //MainUpcomingActionPerformed(evt);
         int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat time = new SimpleDateFormat("hh:mm:ss");
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
-
             jPanel3.removeAll();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from events where completed = 0 order by Important desc, DueDate;");
-            rs.next();
-            while (rs.getInt("Important") == 1) {
+            ResultSet rs = stmt.executeQuery("select * from events where completed = 0 and DueDate<=curdate() order by Important desc, DueDate;");
+            Statement curtime = con.createStatement();
+            ResultSet rstime = curtime.executeQuery("select curtime(), curdate();");
+            rstime.next();
+            while (rs.next()) {
+                if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    if (rstime.getTime("curtime()").before(rs.getTime("DueTime"))) {
+                        rs.next();
+                        continue;
+                    }
+                }
                 ContentPane Panel = new ContentPane();
                 Panel.setBounds(50, 50 + (i * 100), 700, 100);
                 Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
@@ -217,8 +222,63 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(false);
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
-                Panel.setBackground(new Color(237, 76, 103));
+                Panel.setBackground(new Color(255, 234, 167));
+                jPanel3.add(Panel);
+                i++;
+                rs.next();
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        jScrollPane2.setViewportView(jPanel3);
+        revalidate();
+        repaint();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public void MainUpcoming(java.awt.event.ActionEvent evt)
+    {
+        MainUpcomingActionPerformed(evt);
+    }
+    private void MainUpcomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainUpcomingActionPerformed
+        int i = 0;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+
+            jPanel3.removeAll();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from events where completed = 0 and DueDate>=curdate() order by Important desc, DueDate;");
+            rs.next();
+            Statement curtime = con.createStatement();
+
+            ResultSet rstime = curtime.executeQuery("select curtime(), curdate();");
+            rstime.next();
+            //System.out.println(rstime.getTime("curtime()").before(rs.getTime("DueTime")));
+            while (rs.getInt("Important") == 1) {
+                if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+                        rs.next();
+                        continue;
+                    }
+                }
+                ContentPane Panel = new ContentPane();
+                Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
+                Panel.lblEventName.setText(rs.getString("EventName"));
+                Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
+                Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
+                Panel.setBackground(new Color(255, 234, 167));
                 jPanel3.add(Panel);
                 i++;
                 rs.next();
@@ -231,8 +291,9 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
                 if (i % 2 != 0) {
-                    Panel.setBackground(new Color(238, 82, 83));
+                    Panel.setBackground(new Color(178, 190, 195));
                 }
                 jPanel3.add(Panel);
                 i++;
@@ -244,7 +305,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jPanel3);
         revalidate();
         repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_MainUpcomingActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.exit(0);
@@ -264,12 +325,17 @@ public class MainFrame extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("select * from events where completed = 1 order by Important desc, DueDate;");
             while (rs.next()) {
                 ContentPane Panel = new ContentPane();
-                Panel.btnComplete.setVisible(false);
-                Panel.setBackground(Color.green);
                 Panel.setBounds(50, 50 + (i * 100), 700, 100);
+                Panel.lblID.setText(Integer.toString(rs.getInt("ID")));
                 Panel.lblEventName.setText(rs.getString("EventName"));
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
+                Panel.lblCategoryName.setText(rs.getString("Category"));
+                Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                if (i % 2 != 0) {
+                    Panel.setBackground(new Color(178, 190, 195));
+                }
+                //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
                 jPanel3.add(Panel);
                 i++;
             }
@@ -281,20 +347,21 @@ public class MainFrame extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void MainAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainAddActionPerformed
         EventDesc ed = new EventDesc();
         ed.setVisible(true);
         ed.btnAddEvent.setVisible(true);
+        ed.btnCancel.setVisible(true);
         ed.txtEventName.setEditable(true);
         ed.txtCategoryName.setEditable(true);
-        ed.jCheckBox1.setEnabled(true);
-        ed.jComboBox1.setEnabled(true);
-        ed.jComboBox2.setEnabled(true);
-        ed.jComboBox3.setEnabled(true);
-        ed.jComboBox4.setEnabled(true);
-        ed.jComboBox5.setEnabled(true);
-        ed.jComboBox6.setEnabled(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        ed.chbImportant.setEnabled(true);
+        ed.cmbDD.setEnabled(true);
+        ed.cmbMM.setEnabled(true);
+        ed.cmbYYYY.setEnabled(true);
+        ed.cmbHours.setEnabled(true);
+        ed.cmbMinutes.setEnabled(true);
+        ed.cmbSeconds.setEnabled(true);
+    }//GEN-LAST:event_MainAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,8 +416,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton MainAdd;
+    public javax.swing.JButton MainUpcoming;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;

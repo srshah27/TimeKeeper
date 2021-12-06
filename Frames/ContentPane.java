@@ -5,6 +5,7 @@
 package Frames;
 
 import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ContentPane extends javax.swing.JPanel {
     public ContentPane() {
         initComponents();
         lblID.setVisible(false);
+        Important.setVisible(false);
     }
 
     /**
@@ -36,8 +38,10 @@ public class ContentPane extends javax.swing.JPanel {
         lblID = new javax.swing.JLabel();
         btnComplete = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        Important = new javax.swing.JLabel();
+        Completed = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 204));
+        setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(700, 100));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -77,9 +81,13 @@ public class ContentPane extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDueDate)
-                    .addComponent(lblEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                    .addComponent(lblEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDueDate))
+                .addGap(101, 101, 101)
+                .addComponent(Important)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addComponent(Completed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblDueTime, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -96,10 +104,13 @@ public class ContentPane extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEventName)
-                            .addComponent(lblCategoryName))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblEventName)
+                                    .addComponent(lblCategoryName)))
+                            .addComponent(Important))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDueDate)
@@ -107,7 +118,8 @@ public class ContentPane extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblID))
+                    .addComponent(lblID)
+                    .addComponent(Completed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -120,22 +132,37 @@ public class ContentPane extends javax.swing.JPanel {
         ed.txtEventName.setText(lblEventName.getText());
         ed.IDDesc.setText(lblID.getText());
         ed.btnConfirm.setVisible(true);
-        ed.btnUpdate.setVisible(true);       
+        ed.btnUpdate.setVisible(true);
         ed.txtCategoryName.setText(lblCategoryName.getText());
-        ed.jComboBox1.setSelectedItem(Character.toString(lblDueDate.getText().charAt(8)) + Character.toString(lblDueDate.getText().charAt(9)));
-        ed.jComboBox2.setSelectedItem(Character.toString(lblDueDate.getText().charAt(5)) + Character.toString(lblDueDate.getText().charAt(6)));
-        ed.jComboBox3.setSelectedItem(Character.toString(lblDueDate.getText().charAt(0)) + Character.toString(lblDueDate.getText().charAt(1)) + Character.toString(lblDueDate.getText().charAt(2)) + Character.toString(lblDueDate.getText().charAt(3)));
-        ed.jComboBox4.setSelectedItem(Character.toString(lblDueTime.getText().charAt(0)) + Character.toString(lblDueTime.getText().charAt(1)));
-        ed.jComboBox5.setSelectedItem(Character.toString(lblDueTime.getText().charAt(3)) + Character.toString(lblDueTime.getText().charAt(4)));
-        ed.jComboBox6.setSelectedItem(Character.toString(lblDueTime.getText().charAt(6)) + Character.toString(lblDueTime.getText().charAt(7)));        
+        ed.cmbDD.setSelectedItem(Character.toString(lblDueDate.getText().charAt(8)) + Character.toString(lblDueDate.getText().charAt(9)));
+        ed.cmbMM.setSelectedItem(Character.toString(lblDueDate.getText().charAt(5)) + Character.toString(lblDueDate.getText().charAt(6)));
+        ed.cmbYYYY.setSelectedItem(Character.toString(lblDueDate.getText().charAt(0)) + Character.toString(lblDueDate.getText().charAt(1)) + Character.toString(lblDueDate.getText().charAt(2)) + Character.toString(lblDueDate.getText().charAt(3)));
+        ed.cmbHours.setSelectedItem(Character.toString(lblDueTime.getText().charAt(0)) + Character.toString(lblDueTime.getText().charAt(1)));
+        ed.cmbMinutes.setSelectedItem(Character.toString(lblDueTime.getText().charAt(3)) + Character.toString(lblDueTime.getText().charAt(4)));
+        ed.cmbSeconds.setSelectedItem(Character.toString(lblDueTime.getText().charAt(6)) + Character.toString(lblDueTime.getText().charAt(7)));
+        if (Integer.parseInt(Important.getText()) == 1)
+            ed.chbImportant.setSelected(true);
     }//GEN-LAST:event_formMouseClicked
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
-        // TODO add your handling code here:
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+            PreparedStatement pst = con.prepareStatement("update events set completed = 1 where ID = ?");
+            pst.setInt(1, Integer.parseInt(lblID.getText()));
+            pst.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        MainFrame mframe = new MainFrame();
+        mframe.MainUpcoming(evt);
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Completed;
+    public javax.swing.JLabel Important;
     public javax.swing.JButton btnComplete;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JLabel lblCategoryName;

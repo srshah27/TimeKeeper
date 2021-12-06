@@ -5,6 +5,8 @@
 package Frames;
 
 import java.sql.*;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -18,12 +20,23 @@ public class EventDesc extends javax.swing.JFrame {
      */
     public EventDesc() {
         initComponents();
-        //IDDesc.setVisible(false);
+        IDDesc.setVisible(false);
         this.setLocationRelativeTo(null);
         btnAddEvent.setVisible(false);
         btnConfirm.setVisible(false);
-        btnUpdate.setVisible(false);        
-        //txtEventName.setText(ContentPane.lblEventName.getText());
+        btnUpdate.setVisible(false);
+        btnCancel.setVisible(false);
+        Edited.setText("0");
+        Edited.setVisible(false);
+
+        cmbDD.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.DATE)));
+        cmbMM.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MONTH)+1));
+        cmbYYYY.setSelectedItem(String.format("%04d", Calendar.getInstance().get(Calendar.YEAR)));
+
+        cmbHours.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.HOUR)));
+        cmbMinutes.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MINUTE)));
+        cmbSeconds.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.SECOND)));
+
     }
 
     /**
@@ -35,6 +48,7 @@ public class EventDesc extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblEvent = new javax.swing.JLabel();
         txtEventName = new javax.swing.JTextField();
@@ -42,23 +56,28 @@ public class EventDesc extends javax.swing.JFrame {
         txtCategoryName = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         lblCategoryName1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbDD = new javax.swing.JComboBox<>();
+        cmbMM = new javax.swing.JComboBox<>();
+        cmbYYYY = new javax.swing.JComboBox<>();
         lblCategoryName2 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cmbHours = new javax.swing.JComboBox<>();
+        cmbMinutes = new javax.swing.JComboBox<>();
+        cmbSeconds = new javax.swing.JComboBox<>();
+        chbImportant = new javax.swing.JCheckBox();
         IDDesc = new javax.swing.JLabel();
         btnConfirm = new javax.swing.JButton();
         btnAddEvent = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        Edited = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(163, 203, 56));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(370, 345));
 
@@ -83,31 +102,40 @@ public class EventDesc extends javax.swing.JFrame {
         lblCategoryName1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         lblCategoryName1.setText("Due Date");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.setEnabled(false);
+        cmbDD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cmbDD.setBorder(null);
+        cmbDD.setEnabled(false);
+        cmbDD.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                cmbDDAncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox2.setEnabled(false);
+        cmbMM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        cmbMM.setEnabled(false);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-        jComboBox3.setEnabled(false);
+        cmbYYYY.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        cmbYYYY.setEnabled(false);
 
         lblCategoryName2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         lblCategoryName2.setText("Due Time");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        jComboBox4.setEnabled(false);
+        cmbHours.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        cmbHours.setEnabled(false);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01 ", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        jComboBox5.setEnabled(false);
+        cmbMinutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01 ", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbMinutes.setEnabled(false);
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01 ", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        jComboBox6.setEnabled(false);
+        cmbSeconds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01 ", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbSeconds.setEnabled(false);
 
-        jCheckBox1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jCheckBox1.setText("Important");
-        jCheckBox1.setEnabled(false);
+        chbImportant.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        chbImportant.setText("Important");
+        chbImportant.setEnabled(false);
 
         IDDesc.setText("ID");
 
@@ -119,7 +147,7 @@ public class EventDesc extends javax.swing.JFrame {
             }
         });
 
-        btnAddEvent.setText("AddEvent");
+        btnAddEvent.setText("Save");
         btnAddEvent.setBorder(null);
         btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,85 +155,115 @@ public class EventDesc extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setText("Cancel");
+        btnCancel.setBorder(null);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel1.setText("Event Master");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(IDDesc))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addComponent(chbImportant)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEvent)
-                                    .addComponent(lblCategoryName))
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEventName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCategoryName1)
                                     .addComponent(lblCategoryName2))
-                                .addGap(41, 41, 41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbDD, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39)
+                                    .addComponent(cmbMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnAddEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(cmbYYYY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEvent)
+                                    .addComponent(lblCategoryName, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(48, 48, 48)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEventName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)))
+                .addComponent(Edited)
+                .addGap(35, 35, 35)
+                .addComponent(IDDesc)
+                .addGap(29, 29, 29))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(138, 138, 138)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(btnAddEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEvent)
-                    .addComponent(txtEventName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(IDDesc)
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategoryName)
-                    .addComponent(txtCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategoryName1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategoryName2)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(IDDesc)
+                        .addGap(173, 173, 173)
+                        .addComponent(Edited)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEvent)
+                            .addComponent(txtEventName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCategoryName)
+                            .addComponent(txtCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCategoryName1)
+                            .addComponent(cmbDD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbYYYY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCategoryName2)
+                            .addComponent(cmbHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSeconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addComponent(chbImportant)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -213,13 +271,11 @@ public class EventDesc extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
         );
 
         pack();
@@ -228,14 +284,15 @@ public class EventDesc extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         btnConfirm.setVisible(true);
         txtEventName.setEditable(true);
+        Edited.setText("1");
         txtCategoryName.setEditable(true);
-        jCheckBox1.setEnabled(true);
-        jComboBox1.setEnabled(true);
-        jComboBox2.setEnabled(true);
-        jComboBox3.setEnabled(true);
-        jComboBox4.setEnabled(true);
-        jComboBox5.setEnabled(true);
-        jComboBox6.setEnabled(true);
+        chbImportant.setEnabled(true);
+        cmbDD.setEnabled(true);
+        cmbMM.setEnabled(true);
+        cmbYYYY.setEnabled(true);
+        cmbHours.setEnabled(true);
+        cmbMinutes.setEnabled(true);
+        cmbSeconds.setEnabled(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
@@ -243,8 +300,45 @@ public class EventDesc extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
-        dispose();
+        String strError = "";
+        if ((txtEventName.getText().trim()).equals("")) {
+            strError += "Please enter Event Name.\n";
+        }
+        if ((txtCategoryName.getText().trim()).equals("")) {
+            strError += "Please enter Category Name.";
+        }
+
+        if (strError.equals("")) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/timekeeper", "root", "srshah");
+
+                PreparedStatement pst = con.prepareStatement("insert into events(EventName, Category, Important, Completed, DueDate, DueTime) values(?, ?, ?, 0, ?, ?);");
+                pst.setString(1, txtEventName.getText());
+                JOptionPane.showMessageDialog(this, txtEventName.getText());
+                pst.setString(2, txtCategoryName.getText());
+                pst.setInt(3, chbImportant.isSelected() ? 1 : 0);
+                pst.setString(4, cmbYYYY.getSelectedItem().toString() + "-" + cmbMM.getSelectedItem().toString() + "-" + cmbDD.getSelectedItem().toString());
+                pst.setString(5, cmbHours.getSelectedItem().toString() + ":" + cmbMinutes.getSelectedItem().toString() + ":" + cmbSeconds.getSelectedItem().toString());
+                pst.executeUpdate();
+                dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "We are facing some issue. We are looking into the Error.\nPlease try after some time.");
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, strError);
+        }
     }//GEN-LAST:event_btnAddEventActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void cmbDDAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cmbDDAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDDAncestorMoved
 
     /**
      * @param args the command line arguments
@@ -282,18 +376,22 @@ public class EventDesc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Edited;
     public javax.swing.JLabel IDDesc;
     public javax.swing.JButton btnAddEvent;
+    public javax.swing.JButton btnCancel;
     public javax.swing.JButton btnConfirm;
     public javax.swing.JButton btnUpdate;
-    public javax.swing.JCheckBox jCheckBox1;
-    public javax.swing.JComboBox<String> jComboBox1;
-    public javax.swing.JComboBox<String> jComboBox2;
-    public javax.swing.JComboBox<String> jComboBox3;
-    public javax.swing.JComboBox<String> jComboBox4;
-    public javax.swing.JComboBox<String> jComboBox5;
-    public javax.swing.JComboBox<String> jComboBox6;
+    public javax.swing.JCheckBox chbImportant;
+    public javax.swing.JComboBox<String> cmbDD;
+    public javax.swing.JComboBox<String> cmbHours;
+    public javax.swing.JComboBox<String> cmbMM;
+    public javax.swing.JComboBox<String> cmbMinutes;
+    public javax.swing.JComboBox<String> cmbSeconds;
+    public javax.swing.JComboBox<String> cmbYYYY;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     public javax.swing.JLabel lblCategoryName;
     public javax.swing.JLabel lblCategoryName1;
     public javax.swing.JLabel lblCategoryName2;
