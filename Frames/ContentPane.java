@@ -153,6 +153,7 @@ public class ContentPane extends javax.swing.JPanel {
             PreparedStatement pst = con.prepareStatement("update events set completed = 1 where ID = ?");
             pst.setInt(1, Integer.parseInt(lblID.getText()));
             pst.executeUpdate();
+            this.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }

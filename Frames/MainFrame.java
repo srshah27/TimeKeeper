@@ -25,9 +25,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        int i = 0;
+                int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,8 +44,13 @@ public class MainFrame extends javax.swing.JFrame {
             rstime.next();
             //System.out.println(rstime.getTime("curtime()").before(rs.getTime("DueTime")));
             while (rs.getInt("Important") == 1) {
+                System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                 if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                     if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+
+                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+
                         rs.next();
                         continue;
                     }
@@ -58,6 +63,8 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(true);
+
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
                 Panel.setBackground(new Color(255, 234, 167));
                 jPanel3.add(Panel);
@@ -65,6 +72,16 @@ public class MainFrame extends javax.swing.JFrame {
                 rs.next();
             }
             do {
+                if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+                    if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+
+                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+
+                        rs.next();
+                        continue;
+                    }
+                }
                 ContentPane Panel = new ContentPane();
                 Panel.setBounds(50, 50 + (i * 100), 700, 100);
                 Panel.lblEventName.setText(rs.getString("EventName"));
@@ -73,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
-                Panel.btnComplete.setVisible(false);
+                Panel.btnComplete.setVisible(true);
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(178, 190, 195));
                 }
@@ -209,7 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(129, 236, 236));
-        jPanel3.setPreferredSize(new java.awt.Dimension(700, 1000));
+        jPanel3.setPreferredSize(new java.awt.Dimension(700, 1500));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -219,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 1500, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(jPanel3);
@@ -263,7 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
         //MainUpcomingActionPerformed(evt);
         int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -275,10 +292,13 @@ public class MainFrame extends javax.swing.JFrame {
             Statement curtime = con.createStatement();
             ResultSet rstime = curtime.executeQuery("select curtime(), curdate();");
             rstime.next();
+            System.out.println("\nMissed");
             while (rs.next()) {
                 if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                     if (rstime.getTime("curtime()").before(rs.getTime("DueTime"))) {
-                        rs.next();
+
+                        System.out.println("Inside: " + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                         continue;
                     }
                 }
@@ -291,7 +311,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
-                Panel.setBackground(new Color(255, 234, 167));
+                //Panel.setBackground(new Color(255, 234, 167));
                 jPanel3.add(Panel);
                 i++;
             }
@@ -308,7 +328,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void MainUpcomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainUpcomingActionPerformed
         int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat time = new SimpleDateFormat("hh:mm:ss");
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -325,8 +345,13 @@ public class MainFrame extends javax.swing.JFrame {
             rstime.next();
             //System.out.println(rstime.getTime("curtime()").before(rs.getTime("DueTime")));
             while (rs.getInt("Important") == 1) {
+                System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                 if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                     if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+
+                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+
                         rs.next();
                         continue;
                     }
@@ -339,6 +364,8 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
+                Panel.btnComplete.setVisible(true);
+
                 //Panel.lblDateTime.setText(Time.rs.getTime("DueTime"));
                 Panel.setBackground(new Color(255, 234, 167));
                 jPanel3.add(Panel);
@@ -346,6 +373,16 @@ public class MainFrame extends javax.swing.JFrame {
                 rs.next();
             }
             do {
+                if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
+                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+                    if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
+
+                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
+
+                        rs.next();
+                        continue;
+                    }
+                }
                 ContentPane Panel = new ContentPane();
                 Panel.setBounds(50, 50 + (i * 100), 700, 100);
                 Panel.lblEventName.setText(rs.getString("EventName"));
@@ -354,7 +391,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
-                Panel.btnComplete.setVisible(false);
+                Panel.btnComplete.setVisible(true);
                 if (i % 2 != 0) {
                     Panel.setBackground(new Color(178, 190, 195));
                 }

@@ -33,7 +33,7 @@ public class EventDesc extends javax.swing.JFrame {
         cmbMM.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MONTH) + 1));
         cmbYYYY.setSelectedItem(String.format("%04d", Calendar.getInstance().get(Calendar.YEAR)));
 
-        cmbHours.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.HOUR)));
+        cmbHours.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.HOUR_OF_DAY)));
         cmbMinutes.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.MINUTE)));
         cmbSeconds.setSelectedItem(String.format("%02d", Calendar.getInstance().get(Calendar.SECOND)));
 
@@ -308,7 +308,9 @@ public class EventDesc extends javax.swing.JFrame {
             pst.setString(5, cmbHours.getSelectedItem().toString() + ":" + cmbMinutes.getSelectedItem().toString() + ":" + cmbSeconds.getSelectedItem().toString());
             pst.setInt(6, Integer.parseInt(IDDesc.getText()));
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Event Updated");
+            if (Edited.getText().equals("1")) {
+                JOptionPane.showMessageDialog(this, "Event Updated");
+            }
             dispose();
         } catch (Exception e) {
             System.out.println(e);
