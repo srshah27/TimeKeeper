@@ -43,7 +43,7 @@ public class ContentPane extends javax.swing.JPanel {
         Completed = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(116, 185, 255));
         setPreferredSize(new java.awt.Dimension(700, 100));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
