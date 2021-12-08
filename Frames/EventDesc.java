@@ -74,6 +74,7 @@ public class EventDesc extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Event Manager");
         setUndecorated(true);
         setResizable(false);
 
@@ -313,7 +314,7 @@ public class EventDesc extends javax.swing.JFrame {
             }
             dispose();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
         dispose();
     }//GEN-LAST:event_btnConfirmActionPerformed
@@ -342,7 +343,7 @@ public class EventDesc extends javax.swing.JFrame {
                 pst.executeUpdate();
                 dispose();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+                System.out.println(e);
                 dispose();
             }
         } else {
