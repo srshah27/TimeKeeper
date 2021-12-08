@@ -313,7 +313,7 @@ public class EventDesc extends javax.swing.JFrame {
             }
             dispose();
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
         }
         dispose();
     }//GEN-LAST:event_btnConfirmActionPerformed
@@ -342,7 +342,7 @@ public class EventDesc extends javax.swing.JFrame {
                 pst.executeUpdate();
                 dispose();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "We are facing some issue. We are looking into the Error.\nPlease try after some time.");
+                JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
                 dispose();
             }
         } else {
