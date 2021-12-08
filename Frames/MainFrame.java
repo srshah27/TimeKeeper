@@ -25,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        int i = 0;
+                int i = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat time = new SimpleDateFormat("HH:mm:ss");
 
@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Panel.lblEventName.setText(rs.getString("EventName"));
                 Panel.lblDueDate.setText(dateFormat.format(rs.getDate("DueDate")));
                 Panel.lblDueTime.setText(time.format(rs.getTime("DueTime")));
-                Panel.btnDelete.setVisible(true);
+                Panel.btnDelete.setVisible(true);                
                 Panel.lblCategoryName.setText(rs.getString("Category"));
                 Panel.Important.setText(Integer.toString(rs.getInt("Important")));
                 Panel.btnComplete.setVisible(true);
@@ -100,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
             } while (rs.next());
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
         jScrollPane2.setViewportView(jPanel3);
         revalidate();
@@ -315,7 +315,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+           System.out.println(e);
         }
         jScrollPane2.setViewportView(jPanel3);
         revalidate();
@@ -343,13 +343,8 @@ public class MainFrame extends javax.swing.JFrame {
             rstime.next();
             //System.out.println(rstime.getTime("curtime()").before(rs.getTime("DueTime")));
             while (rs.getInt("Important") == 1) {
-                System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                 if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
-                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                     if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
-
-                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
-
                         rs.next();
                         continue;
                     }
@@ -372,11 +367,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             do {
                 if (dateFormat.format(rstime.getDate("curdate()")).equals(dateFormat.format(rs.getDate("DueDate")))) {
-                    System.out.println(rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
                     if (rstime.getTime("curtime()").after(rs.getTime("DueTime"))) {
-
-                        System.out.println("2" + rs.getDate("DueDate") + "" + rs.getTime("DueTime"));
-
                         rs.next();
                         continue;
                     }
@@ -398,7 +389,7 @@ public class MainFrame extends javax.swing.JFrame {
             } while (rs.next());
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
         jScrollPane2.setViewportView(jPanel3);
         revalidate();
@@ -440,7 +431,7 @@ public class MainFrame extends javax.swing.JFrame {
                 i++;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
         jScrollPane2.setViewportView(jPanel3);
         revalidate();
@@ -515,7 +506,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
     }
 

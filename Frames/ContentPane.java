@@ -174,7 +174,7 @@ public class ContentPane extends javax.swing.JPanel {
             pst.executeUpdate();
             this.setVisible(false);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnCompleteActionPerformed
 
@@ -188,7 +188,7 @@ public class ContentPane extends javax.swing.JPanel {
             pst.executeUpdate();
             this.setVisible(false);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unable to perform the action.\nPlease try again");
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
